@@ -1,3 +1,8 @@
+import React, { useState, useEffect } from 'react'; // Ensure React, useState, useEffect are imported
+import ReactDOM from 'react-dom/client'; // Ensure ReactDOM is imported
+import PropTypes from 'prop-types'; // Import PropTypes for prop validation
+import './index.css'; // Import the CSS file
+
 const drumPads = [
   { key: 'Q', sound: 'Heater 1', src: 'https://s3.amazonaws.com/freecodecamp/drums/Heater-1.mp3' },
   { key: 'W', sound: 'Heater 2', src: 'https://s3.amazonaws.com/freecodecamp/drums/Heater-2.mp3' },
@@ -16,9 +21,10 @@ function DrumPad({ pad, playSound }) {
       id={pad.sound}
       className="drum-pad"
       onClick={() => playSound(pad.key)}
+      onKeyDown={(e) => e.key === 'Enter' && playSound(pad.key)} // Add keyboard support
       aria-label={pad.sound}
       role="button"
-      tabIndex="0"
+      tabIndex="0" // Ensure tabIndex is present for focusability
     >
       {pad.key}
       <audio className="clip" id={pad.key} src={pad.src} />
@@ -51,7 +57,7 @@ function DrumMachine() {
     if (audioElement) {
       audioElement.currentTime = 0; // Reset audio to start
       audioElement.play().catch((error) => {
-        console.error('Playback error:', error);
+        console.error('Playback error:', error); // Ensure no-console warning is acknowledged
       });
       audioElement.setAttribute('playing', 'true');
 
@@ -84,4 +90,5 @@ function DrumMachine() {
   );
 }
 
+// Update to use ReactDOM.createRoot
 ReactDOM.createRoot(document.getElementById('root')).render(<DrumMachine />);
