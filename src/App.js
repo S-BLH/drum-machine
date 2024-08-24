@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
+import PropTypes from 'prop-types'; // Ensure 'prop-types' is listed in dependencies
 import './App.css';  // Ensure you have appropriate styles for the drum machine
 
 const drumPads = [
@@ -11,7 +11,7 @@ const drumPads = [
   { key: 'D', sound: 'Open-HH', src: 'https://s3.amazonaws.com/freecodecamp/drums/Dsc_Oh.mp3' },
   { key: 'Z', sound: 'Kick-n\'-Hat', src: 'https://s3.amazonaws.com/freecodecamp/drums/Kick_n_Hat.mp3' },
   { key: 'X', sound: 'Kick', src: 'https://s3.amazonaws.com/freecodecamp/drums/RP4_KICK_1.mp3' },
-  { key: 'C', sound: 'Closed-HH', src: 'https://s3.amazonaws.com/freecodecamp/drums/Cev_H2.mp3' }
+  { key: 'C', sound: 'Closed-HH', src: 'https://s3.amazonaws.com/freecodecamp/drums/Cev_H2.mp3' },
 ];
 
 // Debounce function to limit the rate of function calls
@@ -44,9 +44,9 @@ DrumPad.propTypes = {
   pad: PropTypes.shape({
     key: PropTypes.string.isRequired,
     sound: PropTypes.string.isRequired,
-    src: PropTypes.string.isRequired
+    src: PropTypes.string.isRequired,
   }).isRequired,
-  playSound: PropTypes.func.isRequired
+  playSound: PropTypes.func.isRequired,
 };
 
 function App() {
@@ -74,7 +74,7 @@ function App() {
         console.error('Error playing audio:', error);
       }
 
-      const pad = drumPads.find(pad => pad.key === key);
+      const pad = drumPads.find((pad) => pad.key === key);
       setDisplay(pad.sound);
     }
   }, 100); // 100ms debounce delay
@@ -82,7 +82,7 @@ function App() {
   useEffect(() => {
     const handleKeyPress = (event) => {
       const key = event.key.toUpperCase();
-      if (drumPads.some(pad => pad.key === key)) {
+      if (drumPads.some((pad) => pad.key === key)) {
         playSound(key);
       }
     };
@@ -116,7 +116,7 @@ function App() {
       </header>
       <main>
         <section id="drums">
-          {drumPads.map(pad => (
+          {drumPads.map((pad) => (
             <DrumPad key={pad.key} pad={pad} playSound={playSound} />
           ))}
         </section>
