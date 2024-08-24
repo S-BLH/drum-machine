@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react'; // Removed useState import
+import React, { useEffect } from 'react';
+import PropTypes from 'prop-types'; // Added for PropTypes validation
 import './App.css'; // Ensure you have appropriate styles for the drum machine
 
 const drumPads = [
@@ -31,15 +32,24 @@ function DrumPad({ pad, playSound }) {
       aria-label={pad.sound}
       role="button"
       tabIndex="0"
-      onKeyDown={(e) => e.key === 'Enter' && playSound(pad.key)} // Added keyboard interaction
+      onKeyDown={(e) => e.key === 'Enter' && playSound(pad.key)}
     >
       {pad.key}
-      <audio className="clip" id={pad.key} src={pad.src}>
-        {/* Removed <track> as it is not essential and might not be needed */}
+      <audio className="clip" id={pad.key} src={pad.src} controls>
+        {/* Adding controls for accessibility */}
       </audio>
     </div>
   );
 }
+
+DrumPad.propTypes = {
+  pad: PropTypes.shape({
+    key: PropTypes.string.isRequired,
+    sound: PropTypes.string.isRequired,
+    src: PropTypes.string.isRequired,
+  }).isRequired,
+  playSound: PropTypes.func.isRequired,
+};
 
 function App() {
   const playSound = debounce((key) => {
