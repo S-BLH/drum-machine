@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import PropTypes from 'prop-types'; // Added for PropTypes validation
+import PropTypes from 'prop-types'; // Ensure this is in your dependencies
 import './App.css'; // Ensure you have appropriate styles for the drum machine
 
 const drumPads = [
@@ -36,7 +36,7 @@ function DrumPad({ pad, playSound }) {
     >
       {pad.key}
       <audio className="clip" id={pad.key} src={pad.src} controls>
-        {/* Adding controls for accessibility */}
+        <track kind="captions" />
       </audio>
     </div>
   );
