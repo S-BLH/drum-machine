@@ -41,16 +41,6 @@ function DrumPad({ pad, playSound }) {
   );
 }
 
-// Removed PropTypes validation
-// DrumPad.propTypes = {
-//   pad: PropTypes.shape({
-//     key: PropTypes.string.isRequired,
-//     sound: PropTypes.string.isRequired,
-//     src: PropTypes.string.isRequired,
-//   }).isRequired,
-//   playSound: PropTypes.func.isRequired,
-// };
-
 function App() {
   const playSound = debounce((key) => {
     // Stop any currently playing audio
