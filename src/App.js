@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react'; // Removed useState import
-import PropTypes from 'prop-types'; // Ensure 'prop-types' is listed in dependencies
 import './App.css'; // Ensure you have appropriate styles for the drum machine
 
 const drumPads = [
@@ -42,14 +41,15 @@ function DrumPad({ pad, playSound }) {
   );
 }
 
-DrumPad.propTypes = {
-  pad: PropTypes.shape({
-    key: PropTypes.string.isRequired,
-    sound: PropTypes.string.isRequired,
-    src: PropTypes.string.isRequired,
-  }).isRequired,
-  playSound: PropTypes.func.isRequired,
-};
+// Removed PropTypes validation
+// DrumPad.propTypes = {
+//   pad: PropTypes.shape({
+//     key: PropTypes.string.isRequired,
+//     sound: PropTypes.string.isRequired,
+//     src: PropTypes.string.isRequired,
+//   }).isRequired,
+//   playSound: PropTypes.func.isRequired,
+// };
 
 function App() {
   const playSound = debounce((key) => {
