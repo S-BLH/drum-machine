@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import './App.css';  // Ensure you have appropriate styles for the drum machine
 
 const drumPads = [
@@ -31,12 +32,22 @@ function DrumPad({ pad, playSound }) {
       aria-label={pad.sound}
       role="button"
       tabIndex="0"
+      onKeyDown={(e) => e.key === 'Enter' && playSound(pad.key)} // Added keyboard interaction
     >
       {pad.key}
       <audio className="clip" id={pad.key} src={pad.src} />
     </div>
   );
 }
+
+DrumPad.propTypes = {
+  pad: PropTypes.shape({
+    key: PropTypes.string.isRequired,
+    sound: PropTypes.string.isRequired,
+    src: PropTypes.string.isRequired
+  }).isRequired,
+  playSound: PropTypes.func.isRequired
+};
 
 function App() {
   const [display, setDisplay] = useState('');
@@ -80,7 +91,7 @@ function App() {
     return () => {
       document.removeEventListener('keydown', handleKeyPress);
     };
-  }, []);
+  }, [playSound]); // Added playSound to the dependency array
 
   return (
     <div className="App">
