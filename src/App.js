@@ -35,7 +35,7 @@ function DrumPad({ pad, playSound }) {
     >
       {pad.key}
       <audio className="clip" id={pad.key} src={pad.src}>
-        <track kind="captions" label="English" />
+        {/* Removed <track> as it is not essential and might not be needed */}
       </audio>
     </div>
   );
