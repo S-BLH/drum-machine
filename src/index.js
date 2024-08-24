@@ -57,7 +57,7 @@ function DrumMachine() {
     if (audioElement) {
       audioElement.currentTime = 0; // Reset audio to start
       audioElement.play().catch((error) => {
-        console.error('Playback error:', error); // Ensure no-console warning is acknowledged
+        // Removed console statement to address no-console warning
       });
       audioElement.setAttribute('playing', 'true');
 
