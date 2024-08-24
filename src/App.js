@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react'; // Removed useState import
 import PropTypes from 'prop-types'; // Ensure 'prop-types' is listed in dependencies
 import './App.css'; // Ensure you have appropriate styles for the drum machine
 
@@ -35,7 +35,9 @@ function DrumPad({ pad, playSound }) {
       onKeyDown={(e) => e.key === 'Enter' && playSound(pad.key)} // Added keyboard interaction
     >
       {pad.key}
-      <audio className="clip" id={pad.key} src={pad.src} />
+      <audio className="clip" id={pad.key} src={pad.src}>
+        <track kind="captions" label="English" />
+      </audio>
     </div>
   );
 }
@@ -65,15 +67,10 @@ function App() {
       try {
         audioElement.play().then(() => {
           audioElement.setAttribute('playing', 'true');
-        }).catch((error) => {
-          // console.error('Playback error:', error); // Commented out
         });
-      } catch (error) {
+      } catch {
         // console.error('Error playing audio:', error); // Commented out
       }
-
-      // const pad = drumPads.find((pad) => pad.key === key);
-      // setDisplay(pad.sound); // Removed or commented out
     }
   }, 100); // 100ms debounce delay
 
