@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types'; // Ensure 'prop-types' is listed in dependencies
-import './App.css';  // Ensure you have appropriate styles for the drum machine
+import './App.css'; // Ensure you have appropriate styles for the drum machine
 
 const drumPads = [
   { key: 'Q', sound: 'Heater 1', src: 'https://s3.amazonaws.com/freecodecamp/drums/Heater-1.mp3' },
@@ -50,8 +50,6 @@ DrumPad.propTypes = {
 };
 
 function App() {
-  const [display, setDisplay] = useState('');
-
   const playSound = debounce((key) => {
     // Stop any currently playing audio
     const currentlyPlaying = document.querySelector('.clip[playing="true"]');
@@ -68,14 +66,14 @@ function App() {
         audioElement.play().then(() => {
           audioElement.setAttribute('playing', 'true');
         }).catch((error) => {
-          console.error('Playback error:', error);
+          // console.error('Playback error:', error); // Commented out
         });
       } catch (error) {
-        console.error('Error playing audio:', error);
+        // console.error('Error playing audio:', error); // Commented out
       }
 
-      const pad = drumPads.find((pad) => pad.key === key);
-      setDisplay(pad.sound);
+      // const pad = drumPads.find((pad) => pad.key === key);
+      // setDisplay(pad.sound); // Removed or commented out
     }
   }, 100); // 100ms debounce delay
 
@@ -91,7 +89,7 @@ function App() {
     return () => {
       document.removeEventListener('keydown', handleKeyPress);
     };
-  }, [playSound]); // Added playSound to the dependency array
+  }, [playSound]);
 
   return (
     <div className="App">
